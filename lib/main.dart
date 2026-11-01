@@ -524,7 +524,6 @@ class _MedReviewHomeState extends State<MedReviewHome> {
           body: RepaintBoundary(
             child: Column(
               children: [
-                // Top Navigation Bar for Desktop / Tablet
                 if (!isMobile)
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
@@ -634,7 +633,6 @@ class _MedReviewHomeState extends State<MedReviewHome> {
                     ),
                   ),
 
-                // Fully Cached StreamBuilder for Zero-Lag Transitions
                 Expanded(
                   child: StreamBuilder<QuerySnapshot>(
                     stream: questionsRef.snapshots(),
@@ -704,7 +702,6 @@ class _MedReviewHomeState extends State<MedReviewHome> {
 
                           return Row(
                             children: [
-                              // Left Sidebar Quick Navigation (Desktop Only)
                               Container(
                                 width: 260,
                                 color: Colors.white,
@@ -740,7 +737,6 @@ class _MedReviewHomeState extends State<MedReviewHome> {
                                 ),
                               ),
                               const VerticalDivider(width: 1, color: Color(0xFFf3e8eb)),
-                              // Center Main Workspace
                               Expanded(
                                 child: KeyedSubtree(
                                   key: ValueKey<String>(currentScreen),
@@ -859,7 +855,6 @@ class _MedReviewHomeState extends State<MedReviewHome> {
     );
   }
 
-  // --- MODERN DASHBOARD WITH RESPONSIVE GRID ---
   Widget _buildModernDashboard(List allQuestions, List categories, bool isMobile) {
     final now = DateTime.now();
     
@@ -1237,7 +1232,6 @@ class _MedReviewHomeState extends State<MedReviewHome> {
     );
   }
 
-  // --- QUESTION LIBRARY ---
   Widget _buildLibraryScreen(List allQuestions, List categories, bool isMobile) {
     return Padding(
       padding: EdgeInsets.all(isMobile ? 16 : 30),
@@ -1325,7 +1319,6 @@ class _MedReviewHomeState extends State<MedReviewHome> {
     );
   }
 
-  // --- ANALYTICS DASHBOARD ---
   Widget _buildAnalyticsScreen(bool isMobile) {
     final currentUser = FirebaseAuth.instance.currentUser;
 
@@ -1474,7 +1467,6 @@ class _MedReviewHomeState extends State<MedReviewHome> {
     );
   }
 
-  // --- EXAM SCREEN (Responsive Split-Pane or Stacked Layout) ---
   Widget _buildExamScreen(bool isMobile) {
     if (activeSessionQuestions.isEmpty) {
       return Center(
