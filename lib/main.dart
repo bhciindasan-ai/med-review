@@ -77,6 +77,50 @@ class _QuizScreenState extends State<QuizScreen> {
       ],
       rationale: "The radial nerve travels closely along the posterior aspect of the humerus within the spiral groove, making it highly vulnerable during midshaft humeral fractures.",
     ),
+    QuestionModel(
+      category: "Medical-Surgical",
+      questionText: "A patient with left-sided heart failure is admitted to the unit. Which clinical manifestation should the nurse expect to assess?",
+      options: [
+        OptionModel(text: "Jugular venous distention (JVD)", isCorrect: false),
+        OptionModel(text: "Dependent peripheral edema", isCorrect: false),
+        OptionModel(text: "Bilaterally crackles in lung bases", isCorrect: true),
+        OptionModel(text: "Hepatosplenomegaly", isCorrect: false),
+      ],
+      rationale: "Left-sided heart failure results in pulmonary congestion and increased pulmonary hydrostatic pressure, leading to dyspnea, orthopnea, and inspiratory crackles. JVD and peripheral edema are hallmarks of right-sided failure.",
+    ),
+    QuestionModel(
+      category: "Pharmacology",
+      questionText: "A client receiving intravenous regular insulin develops acute diaphoresis, tremors, and confusion. What is the immediate nursing priority?",
+      options: [
+        OptionModel(text: "Administer 15-20 grams of a fast-acting oral carbohydrate if conscious", isCorrect: true),
+        OptionModel(text: "Recheck blood glucose in two hours", isCorrect: false),
+        OptionModel(text: "Administer a long-acting insulin dose", isCorrect: false),
+        OptionModel(text: "Encourage physical exercise to burn excess glucose", isCorrect: false),
+      ],
+      rationale: "The client is exhibiting signs of acute hypoglycemia. If conscious and able to swallow, the immediate intervention is to administer 15-20g of fast-acting carbohydrates.",
+    ),
+    QuestionModel(
+      category: "Critical Care",
+      questionText: "A nurse is managing a client with a chest tube connected to a water-seal system. Continuous bubbling is observed in the water-seal chamber. What does this indicate?",
+      options: [
+        OptionModel(text: "Normal lung re-expansion progress", isCorrect: false),
+        OptionModel(text: "An air leak in the drainage system or chest cavity", isCorrect: true),
+        OptionModel(text: "Obstruction in the chest tube catheter", isCorrect: false),
+        OptionModel(text: "Normal suction control pressure regulation", isCorrect: false),
+      ],
+      rationale: "Intermittent bubbling during expiration is normal, but continuous bubbling in the water-seal chamber indicates an air leak somewhere in the system or around the insertion site.",
+    ),
+    QuestionModel(
+      category: "Medical-Surgical",
+      questionText: "An emergency department client with chronic kidney disease (CKD) has a serum potassium level of 6.8 mEq/L. Which electrocardiogram (ECG) change is most characteristic of this imbalance?",
+      options: [
+        OptionModel(text: "U waves", isCorrect: false),
+        OptionModel(text: "Flattened T waves", isCorrect: false),
+        OptionModel(text: "Tall, peaked T waves", isCorrect: true),
+        OptionModel(text: "Prolonged QT intervals", isCorrect: false),
+      ],
+      rationale: "Severe hyperkalemia (potassium > 5.0 mEq/L) commonly presents with tall, peaked T waves on an ECG, which can rapidly progress to widened QRS complexes and ventricular arrhythmias if untreated.",
+    ),
   ];
 
   late List<QuestionModel> questions;
