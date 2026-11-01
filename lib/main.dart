@@ -481,7 +481,7 @@ class _MedReviewHomeState extends State<MedReviewHome> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        bool isMobile = true;
+        bool isMobile = constraints.maxWidth < 900 || html.window.navigator.userAgent.contains('Mobi');
 
         return Scaffold(
           appBar: isMobile
