@@ -99,83 +99,85 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFfff5f7),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Container(
-            padding: const EdgeInsets.all(30),
-            constraints: const BoxConstraints(maxWidth: 480),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFFf3e8eb)),
-              boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 20, offset: Offset(0, 8))],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.local_hospital_rounded, color: Color(0xFF8f4f5a), size: 32),
-                    const SizedBox(width: 12),
-                    Flexible(child: Text('N.R.R. (ADZU)', style: GoogleFonts.lexend(fontSize: 22, fontWeight: FontWeight.bold, color: const Color(0xFF38292d)), overflow: TextOverflow.ellipsis)),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  isLoginMode ? 'Sign in to access your board review hub' : 'Create your student review account',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.lexend(fontSize: 13, color: const Color(0xFF8a7378)),
-                ),
-                const SizedBox(height: 30),
-                if (errorMessage.isNotEmpty)
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    margin: const EdgeInsets.only(bottom: 20),
-                    decoration: BoxDecoration(color: Colors.red.shade50, borderRadius: BorderRadius.circular(8)),
-                    child: Text(errorMessage, style: GoogleFonts.lexend(color: Colors.red.shade700, fontSize: 12)),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Container(
+              padding: const EdgeInsets.all(30),
+              constraints: const BoxConstraints(maxWidth: 480),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: const Color(0xFFf3e8eb)),
+                boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 20, offset: Offset(0, 8))],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.local_hospital_rounded, color: Color(0xFF8f4f5a), size: 32),
+                      const SizedBox(width: 12),
+                      Flexible(child: Text('N.R.R. (ADZU)', style: GoogleFonts.lexend(fontSize: 22, fontWeight: FontWeight.bold, color: const Color(0xFF38292d)), overflow: TextOverflow.ellipsis)),
+                    ],
                   ),
-                TextField(
-                  controller: emailController,
-                  decoration: const InputDecoration(labelText: 'Email Address', border: OutlineInputBorder()),
-                  style: GoogleFonts.lexend(),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(labelText: 'Password', border: OutlineInputBorder()),
-                  style: GoogleFonts.lexend(),
-                ),
-                const SizedBox(height: 24),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF8f4f5a),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  const SizedBox(height: 8),
+                  Text(
+                    isLoginMode ? 'Sign in to access your board review hub' : 'Create your student review account',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.lexend(fontSize: 13, color: const Color(0xFF8a7378)),
                   ),
-                  onPressed: isLoading ? null : _submitAuth,
-                  child: isLoading 
-                      ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                      : Text(isLoginMode ? 'Sign In' : 'Create Account', style: GoogleFonts.lexend(fontWeight: FontWeight.bold, fontSize: 15)),
-                ),
-                const SizedBox(height: 16),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      isLoginMode = !isLoginMode;
-                      errorMessage = '';
-                    });
-                  },
-                  child: Text(
-                    isLoginMode ? 'Don\'t have an account? Sign Up' : 'Already have an account? Sign In',
-                    style: GoogleFonts.lexend(color: const Color(0xFF8f4f5a), fontWeight: FontWeight.w600),
+                  const SizedBox(height: 30),
+                  if (errorMessage.isNotEmpty)
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      margin: const EdgeInsets.only(bottom: 20),
+                      decoration: BoxDecoration(color: Colors.red.shade50, borderRadius: BorderRadius.circular(8)),
+                      child: Text(errorMessage, style: GoogleFonts.lexend(color: Colors.red.shade700, fontSize: 12)),
+                    ),
+                  TextField(
+                    controller: emailController,
+                    decoration: const InputDecoration(labelText: 'Email Address', border: OutlineInputBorder()),
+                    style: GoogleFonts.lexend(),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 16),
+                  TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(labelText: 'Password', border: OutlineInputBorder()),
+                    style: GoogleFonts.lexend(),
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF8f4f5a),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
+                    onPressed: isLoading ? null : _submitAuth,
+                    child: isLoading 
+                        ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                        : Text(isLoginMode ? 'Sign In' : 'Create Account', style: GoogleFonts.lexend(fontWeight: FontWeight.bold, fontSize: 15)),
+                  ),
+                  const SizedBox(height: 16),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isLoginMode = !isLoginMode;
+                        errorMessage = '';
+                      });
+                    },
+                    child: Text(
+                      isLoginMode ? 'Don\'t have an account? Sign Up' : 'Already have an account? Sign In',
+                      style: GoogleFonts.lexend(color: const Color(0xFF8f4f5a), fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -226,7 +228,7 @@ class _MedReviewHomeState extends State<MedReviewHome> {
   void _playSound(String type) {
     try {
       final html.AudioElement audio = html.AudioElement(
-        'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcHCmS2uHCWxMTCp3H78NdHx0pju3us28kIBwsvd3usmc6IBy93u6zZzoiAcvd7us2c6IBy93u6zZzo='
+        'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcHCmS2uHCWxMTCp3H78NdHx0pju3us28kIBwsvd3usmc6IBy93u6zZzoiAcvd7us2c6IBy93u6zZzoiAcvd7us2c6IBy93u6zZzo='
       );
       audio.volume = 0.3;
       audio.play();
@@ -521,236 +523,238 @@ class _MedReviewHomeState extends State<MedReviewHome> {
                 )
               : null,
           drawer: isMobile ? _buildMobileDrawer() : null,
-          body: RepaintBoundary(
-            child: Column(
-              children: [
-                if (!isMobile)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(colors: [Color(0xFF38292d), Color(0xFF8f4f5a)]),
-                      boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3))],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.local_hospital_rounded, color: Color(0xFFf3e8eb), size: 24),
-                            const SizedBox(width: 12),
-                            PopupMenuButton<String>(
-                              offset: const Offset(0, 45),
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                              onSelected: (value) async {
-                                if (value == 'menu') {
-                                  examTimer?.cancel();
-                                  setState(() => currentScreen = 'menu');
-                                } else if (value == 'library') {
-                                  examTimer?.cancel();
-                                  setState(() => currentScreen = 'library');
-                                } else if (value == 'analytics') {
-                                  examTimer?.cancel();
-                                  setState(() => currentScreen = 'analytics');
-                                } else if (value == 'import') {
-                                  _showImportDialog(context);
-                                } else if (value == 'logout') {
-                                  await FirebaseAuth.instance.signOut();
-                                }
-                              },
-                              itemBuilder: (context) => [
-                                PopupMenuItem(value: 'menu', child: Text('🏠 Dashboard Home', style: GoogleFonts.lexend(fontWeight: FontWeight.w500))),
-                                PopupMenuItem(value: 'library', child: Text('📚 Question Library', style: GoogleFonts.lexend(fontWeight: FontWeight.w500))),
-                                PopupMenuItem(value: 'analytics', child: Text('📊 Analytics Dashboard', style: GoogleFonts.lexend(fontWeight: FontWeight.w500))),
-                                PopupMenuItem(value: 'import', child: Text('☁️ Import Chatbot JSON', style: GoogleFonts.lexend(fontWeight: FontWeight.w500))),
-                                const PopupMenuDivider(),
-                                PopupMenuItem(value: 'logout', child: Text('🚪 Sign Out', style: GoogleFonts.lexend(fontWeight: FontWeight.w500, color: Colors.red))),
-                              ],
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'N.R.R. (ADZU)',
-                                    style: GoogleFonts.lexend(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18, letterSpacing: 1.2),
-                                  ),
-                                  const SizedBox(width: 6),
-                                  const Icon(Icons.arrow_drop_down_rounded, color: Colors.white70),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            if (currentScreen == 'exam' || currentScreen == 'srs' || currentScreen == 'bookmarked') ...[
-                              ValueListenableBuilder<int>(
-                                valueListenable: remainingSecondsNotifier,
-                                builder: (context, seconds, child) {
-                                  return Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.15),
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: Colors.white30),
-                                    ),
-                                    child: Text(
-                                      '⏱️ ${formatTimer(seconds)}',
-                                      style: GoogleFonts.lexend(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
-                                    ),
-                                  );
-                                },
-                              ),
-                              const SizedBox(width: 14),
-                              ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFe11d48), foregroundColor: Colors.white),
-                                icon: const Icon(Icons.exit_to_app, size: 16),
-                                label: const Text('Exit Session'),
-                                onPressed: () {
-                                  _playSound('click');
-                                  examTimer?.cancel();
-                                  setState(() {
-                                    currentScreen = 'menu';
-                                    quizFinished = false;
-                                  });
-                                },
-                              ),
-                            ] else ...[
-                              OutlinedButton.icon(
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  side: const BorderSide(color: Colors.white70),
-                                ),
-                                icon: const Icon(Icons.folder_shared_rounded, size: 16),
-                                label: const Text('Question Library'),
-                                onPressed: () {
-                                  _playSound('click');
-                                  setState(() => currentScreen = 'library');
-                                },
-                              ),
-                            ],
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-
-                Expanded(
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: questionsRef.snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting && !isInitialized) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-
-                      if (snapshot.hasError) {
-                        return Center(child: Text('Error loading questions: ${snapshot.error}', style: const TextStyle(color: Colors.red)));
-                      }
-
-                      final currentUser = FirebaseAuth.instance.currentUser;
-                      final docs = snapshot.data?.docs ?? [];
-
-                      return FutureBuilder(
-                        future: Future.wait(docs.map((d) async {
-                          final qData = {'id': d.id, ...d.data() as Map<String, dynamic>};
-                          if (currentUser == null) return qData;
-
-                          final srsSnap = await questionsRef.doc(d.id).collection('user_srs').doc(currentUser.uid).get();
-                          if (srsSnap.exists) {
-                            qData.addAll(srsSnap.data() as Map<String, dynamic>);
-                          } else {
-                            qData['srsRepetition'] = 0;
-                            qData['srsIntervalDays'] = 1;
-                            qData['srsNextReviewDate'] = Timestamp.fromDate(DateTime.now());
-                          }
-
-                          final bmSnap = await questionsRef.doc(d.id).collection('user_bookmarks').doc(currentUser.uid).get();
-                          if (bmSnap.exists) {
-                            qData['isBookmarked'] = bmSnap.data()?['isBookmarked'] ?? false;
-                          } else {
-                            qData['isBookmarked'] = false;
-                          }
-
-                          return qData;
-                        })),
-                        builder: (context, processedSnapshot) {
-                          if (!processedSnapshot.hasData && !isInitialized) {
-                            return const Center(child: CircularProgressIndicator());
-                          }
-
-                          if (processedSnapshot.hasData) {
-                            cachedAllQuestions = processedSnapshot.data as List;
-                            cachedCategories = <String>['All', ...cachedAllQuestions.map((q) => q['category']?.toString() ?? 'General').toSet().toList()];
-                            isInitialized = true;
-                          }
-
-                          Widget targetScreen;
-                          if (currentScreen == 'menu') {
-                            targetScreen = _buildModernDashboard(cachedAllQuestions, cachedCategories, isMobile);
-                          } else if (currentScreen == 'library') {
-                            targetScreen = _buildLibraryScreen(cachedAllQuestions, cachedCategories, isMobile);
-                          } else if (currentScreen == 'analytics') {
-                            targetScreen = _buildAnalyticsScreen(isMobile);
-                          } else {
-                            targetScreen = _buildExamScreen(isMobile);
-                          }
-
-                          if (isMobile) {
-                            return KeyedSubtree(
-                              key: ValueKey<String>(currentScreen),
-                              child: targetScreen,
-                            );
-                          }
-
-                          return Row(
+          body: SafeArea(
+            child: RepaintBoundary(
+              child: Column(
+                children: [
+                  if (!isMobile)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(colors: [Color(0xFF38292d), Color(0xFF8f4f5a)]),
+                        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3))],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
                             children: [
-                              Container(
-                                width: 260,
+                              const Icon(Icons.local_hospital_rounded, color: Color(0xFFf3e8eb), size: 24),
+                              const SizedBox(width: 12),
+                              PopupMenuButton<String>(
+                                offset: const Offset(0, 45),
                                 color: Colors.white,
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                onSelected: (value) async {
+                                  if (value == 'menu') {
+                                    examTimer?.cancel();
+                                    setState(() => currentScreen = 'menu');
+                                  } else if (value == 'library') {
+                                    examTimer?.cancel();
+                                    setState(() => currentScreen = 'library');
+                                  } else if (value == 'analytics') {
+                                    examTimer?.cancel();
+                                    setState(() => currentScreen = 'analytics');
+                                  } else if (value == 'import') {
+                                    _showImportDialog(context);
+                                  } else if (value == 'logout') {
+                                    await FirebaseAuth.instance.signOut();
+                                  }
+                                },
+                                itemBuilder: (context) => [
+                                  PopupMenuItem(value: 'menu', child: Text('🏠 Dashboard Home', style: GoogleFonts.lexend(fontWeight: FontWeight.w500))),
+                                  PopupMenuItem(value: 'library', child: Text('📚 Question Library', style: GoogleFonts.lexend(fontWeight: FontWeight.w500))),
+                                  PopupMenuItem(value: 'analytics', child: Text('📊 Analytics Dashboard', style: GoogleFonts.lexend(fontWeight: FontWeight.w500))),
+                                  PopupMenuItem(value: 'import', child: Text('☁️ Import Chatbot JSON', style: GoogleFonts.lexend(fontWeight: FontWeight.w500))),
+                                  const PopupMenuDivider(),
+                                  PopupMenuItem(value: 'logout', child: Text('🚪 Sign Out', style: GoogleFonts.lexend(fontWeight: FontWeight.w500, color: Colors.red))),
+                                ],
+                                child: Row(
                                   children: [
-                                    Text('NAVIGATION', style: GoogleFonts.lexend(fontSize: 11, fontWeight: FontWeight.bold, color: const Color(0xFF8a7378), letterSpacing: 1.2)),
-                                    const SizedBox(height: 14),
-                                    _sidebarNavItem(Icons.dashboard_rounded, 'Dashboard', 'menu'),
-                                    _sidebarNavItem(Icons.library_books_rounded, 'Question Library', 'library'),
-                                    _sidebarNavItem(Icons.analytics_rounded, 'Analytics Hub', 'analytics'),
-                                    const Divider(height: 35),
-                                    Text('QUICK STATS', style: GoogleFonts.lexend(fontSize: 11, fontWeight: FontWeight.bold, color: const Color(0xFF8a7378), letterSpacing: 1.2)),
-                                    const SizedBox(height: 14),
-                                    _sidebarStatItem('Total Bank', '${cachedAllQuestions.length} Items'),
-                                    _sidebarStatItem('Bookmarked', '${cachedAllQuestions.where((q) => q['isBookmarked'] == true).length} Saved'),
-                                    const Spacer(),
-                                    Container(
-                                      padding: const EdgeInsets.all(12),
-                                      decoration: BoxDecoration(color: const Color(0xFFfff5f7), borderRadius: BorderRadius.circular(10)),
-                                      child: Row(
-                                        children: [
-                                          const Icon(Icons.verified_user_rounded, color: Color(0xFF8f4f5a), size: 20),
-                                          const SizedBox(width: 10),
-                                          Expanded(
-                                            child: Text('Session Active\nStay Signed In', style: GoogleFonts.lexend(fontSize: 11, color: const Color(0xFF38292d), fontWeight: FontWeight.w600)),
-                                          ),
-                                        ],
-                                      ),
+                                    Text(
+                                      'N.R.R. (ADZU)',
+                                      style: GoogleFonts.lexend(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18, letterSpacing: 1.2),
                                     ),
+                                    const SizedBox(width: 6),
+                                    const Icon(Icons.arrow_drop_down_rounded, color: Colors.white70),
                                   ],
                                 ),
                               ),
-                              const VerticalDivider(width: 1, color: Color(0xFFf3e8eb)),
-                              Expanded(
-                                child: KeyedSubtree(
-                                  key: ValueKey<String>(currentScreen),
-                                  child: targetScreen,
-                                ),
-                              ),
                             ],
-                          );
-                        },
-                      );
-                    },
+                          ),
+                          Row(
+                            children: [
+                              if (currentScreen == 'exam' || currentScreen == 'srs' || currentScreen == 'bookmarked') ...[
+                                ValueListenableBuilder<int>(
+                                  valueListenable: remainingSecondsNotifier,
+                                  builder: (context, seconds, child) {
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.15),
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(color: Colors.white30),
+                                      ),
+                                      child: Text(
+                                        '⏱️ ${formatTimer(seconds)}',
+                                        style: GoogleFonts.lexend(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                const SizedBox(width: 14),
+                                ElevatedButton.icon(
+                                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFe11d48), foregroundColor: Colors.white),
+                                  icon: const Icon(Icons.exit_to_app, size: 16),
+                                  label: const Text('Exit Session'),
+                                  onPressed: () {
+                                    _playSound('click');
+                                    examTimer?.cancel();
+                                    setState(() {
+                                      currentScreen = 'menu';
+                                      quizFinished = false;
+                                    });
+                                  },
+                                ),
+                              ] else ...[
+                                OutlinedButton.icon(
+                                  style: OutlinedButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    side: const BorderSide(color: Colors.white70),
+                                  ),
+                                  icon: const Icon(Icons.folder_shared_rounded, size: 16),
+                                  label: const Text('Question Library'),
+                                  onPressed: () {
+                                    _playSound('click');
+                                    setState(() => currentScreen = 'library');
+                                  },
+                                ),
+                              ],
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  Expanded(
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: questionsRef.snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting && !isInitialized) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+
+                        if (snapshot.hasError) {
+                          return Center(child: Text('Error loading questions: ${snapshot.error}', style: const TextStyle(color: Colors.red)));
+                        }
+
+                        final currentUser = FirebaseAuth.instance.currentUser;
+                        final docs = snapshot.data?.docs ?? [];
+
+                        return FutureBuilder(
+                          future: Future.wait(docs.map((d) async {
+                            final qData = {'id': d.id, ...d.data() as Map<String, dynamic>};
+                            if (currentUser == null) return qData;
+
+                            final srsSnap = await questionsRef.doc(d.id).collection('user_srs').doc(currentUser.uid).get();
+                            if (srsSnap.exists) {
+                              qData.addAll(srsSnap.data() as Map<String, dynamic>);
+                            } else {
+                              qData['srsRepetition'] = 0;
+                              qData['srsIntervalDays'] = 1;
+                              qData['srsNextReviewDate'] = Timestamp.fromDate(DateTime.now());
+                            }
+
+                            final bmSnap = await questionsRef.doc(d.id).collection('user_bookmarks').doc(currentUser.uid).get();
+                            if (bmSnap.exists) {
+                              qData['isBookmarked'] = bmSnap.data()?['isBookmarked'] ?? false;
+                            } else {
+                              qData['isBookmarked'] = false;
+                            }
+
+                            return qData;
+                          })),
+                          builder: (context, processedSnapshot) {
+                            if (!processedSnapshot.hasData && !isInitialized) {
+                              return const Center(child: CircularProgressIndicator());
+                            }
+
+                            if (processedSnapshot.hasData) {
+                              cachedAllQuestions = processedSnapshot.data as List;
+                              cachedCategories = <String>['All', ...cachedAllQuestions.map((q) => q['category']?.toString() ?? 'General').toSet().toList()];
+                              isInitialized = true;
+                            }
+
+                            Widget targetScreen;
+                            if (currentScreen == 'menu') {
+                              targetScreen = _buildModernDashboard(cachedAllQuestions, cachedCategories, isMobile);
+                            } else if (currentScreen == 'library') {
+                              targetScreen = _buildLibraryScreen(cachedAllQuestions, cachedCategories, isMobile);
+                            } else if (currentScreen == 'analytics') {
+                              targetScreen = _buildAnalyticsScreen(isMobile);
+                            } else {
+                              targetScreen = _buildExamScreen(isMobile);
+                            }
+
+                            if (isMobile) {
+                              return KeyedSubtree(
+                                key: ValueKey<String>(currentScreen),
+                                child: targetScreen,
+                              );
+                            }
+
+                            return Row(
+                              children: [
+                                Container(
+                                  width: 260,
+                                  color: Colors.white,
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text('NAVIGATION', style: GoogleFonts.lexend(fontSize: 11, fontWeight: FontWeight.bold, color: const Color(0xFF8a7378), letterSpacing: 1.2)),
+                                      const SizedBox(height: 14),
+                                      _sidebarNavItem(Icons.dashboard_rounded, 'Dashboard', 'menu'),
+                                      _sidebarNavItem(Icons.library_books_rounded, 'Question Library', 'library'),
+                                      _sidebarNavItem(Icons.analytics_rounded, 'Analytics Hub', 'analytics'),
+                                      const Divider(height: 35),
+                                      Text('QUICK STATS', style: GoogleFonts.lexend(fontSize: 11, fontWeight: FontWeight.bold, color: const Color(0xFF8a7378), letterSpacing: 1.2)),
+                                      const SizedBox(height: 14),
+                                      _sidebarStatItem('Total Bank', '${cachedAllQuestions.length} Items'),
+                                      _sidebarStatItem('Bookmarked', '${cachedAllQuestions.where((q) => q['isBookmarked'] == true).length} Saved'),
+                                      const Spacer(),
+                                      Container(
+                                        padding: const EdgeInsets.all(12),
+                                        decoration: BoxDecoration(color: const Color(0xFFfff5f7), borderRadius: BorderRadius.circular(10)),
+                                        child: Row(
+                                          children: [
+                                            const Icon(Icons.verified_user_rounded, color: Color(0xFF8f4f5a), size: 20),
+                                            const SizedBox(width: 10),
+                                            Expanded(
+                                              child: Text('Session Active\nStay Signed In', style: GoogleFonts.lexend(fontSize: 11, color: const Color(0xFF38292d), fontWeight: FontWeight.w600)),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const VerticalDivider(width: 1, color: Color(0xFFf3e8eb)),
+                                Expanded(
+                                  child: KeyedSubtree(
+                                    key: ValueKey<String>(currentScreen),
+                                    child: targetScreen,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
